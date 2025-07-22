@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/BookDisplay.css";
 
 const BookDisplay = ({ book }) => {
@@ -7,10 +7,30 @@ const BookDisplay = ({ book }) => {
     author = null,
     price = 0,
     discountPercentage = 0,
-    inStock = true,
+    stockQuantity = 0,
     categories = [],
   } = book;
 
+  const [isConsidering, setIsConsidering] = useState(false);
+  const [stockInputValue, setStockInputValue] = useState(stockQuantity);
+
+  const handleStockUpdate = () => {
+    const newAmount = parseInt(stockInputValue, 10);
+    if (isNaN(newAmount) || newAmount < stockQuantity) {
+      alert("נא להזין מספר תקין גדול או שווה לכמות הנוכחית במלאי.");
+      setStockInputValue(stockQuantity);
+      return;
+    }
+    const amountToAdd = newAmount - stockQuantity;
+    if (amountToAdd === 0) {
+      alert("לא נוספה כמות למלאי.");
+      return;
+    }
+    book.stockQuantity += amountToAdd;
+    alert(`הוספת ${amountToAdd} עותקים של ${title} למלאי!`);
+  };
+
+  const inStock = stockQuantity > 0; // בדיקה אם הספר במלאי
   const discountedPrice = price * (1 - discountPercentage / 100);
   const displayAuthor = author === null ? "anonymous" : author;
 
@@ -28,6 +48,10 @@ const BookDisplay = ({ book }) => {
     alert(`"הוספת את ${title} לסל!"`);
   };
 
+  const switchConsideration = () => {
+    setIsConsidering((prev) => !prev);
+  };
+
   const hasSignificantDiscount = discountPercentage >= 15;
 
   // קלאסים דינמיים עבור כרטיס הספר
@@ -35,10 +59,10 @@ const BookDisplay = ({ book }) => {
     "book-card",
     hasSignificantDiscount && inStock ? "significant-discount" : "", // רק אם יש הנחה וגם במלאי
     !inStock ? "out-of-stock-card" : "", // אם אזל מהמלאי
+    isConsidering ? "considering-card" : "",
   ]
     .filter(Boolean)
     .join(" "); // מסנן קלאסים ריקים ומחבר
-
   return (
     <div className={cardClasses}>
       <h3>{title}</h3>
@@ -72,13 +96,43 @@ const BookDisplay = ({ book }) => {
       )}
 
       <div className="stock-action-area">
-        <button
-          onClick={handleAddToCart}
-          className={`add-to-cart-button ${!inStock ? "hidden-button" : ""}`} // כפתור מוסתר אם אזל
-        >
-          הוסף לסל
-        </button>
-        {!inStock && <p className="out-of-stock-message">הספר אזל מהמלאי!</p>}
+        {/* {stockQuantity > 0 && (
+    <p className="stock-info">כמות במלאי: {stockQuantity}</p>
+  )} */}
+
+        {inStock ? (
+          <>
+            <div className="buttons-row">
+              <button onClick={handleAddToCart} className="add-to-cart-button">
+                הוסף לסל
+              </button>
+              <button className="consider-button" onClick={switchConsideration}>
+                {isConsidering ? "ביטול התלבטות" : "מתלבט/ת לגביו"}
+              </button>
+            </div>
+            <div className="stock-update">
+              <input
+                type="number"
+                min={stockQuantity}
+                value={stockInputValue}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  if (val === "") {
+                    setStockInputValue("");
+                    return;
+                  }
+                  const numericVal = parseInt(val, 10);
+                  if (!isNaN(numericVal) && numericVal >= stockQuantity) {
+                    setStockInputValue(numericVal);
+                  }
+                }}
+              />
+              <button onClick={handleStockUpdate}>עדכן מלאי</button>
+            </div>
+          </>
+        ) : (
+          <p className="out-of-stock-message">הספר אזל מהמלאי!</p>
+        )}
       </div>
     </div>
   );

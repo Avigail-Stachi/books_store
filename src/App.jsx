@@ -24,7 +24,7 @@ function App() {
       author: "א. כהן",
       price: 50.0,
       discountPercentage: 10,
-      inStock: true,
+      stockQuantity: 5,
       categories: [ALL_CATEGORIES.SCIENCE_FICTION, ALL_CATEGORIES.ADVENTURE],
     },
     {
@@ -33,7 +33,7 @@ function App() {
       author: null,
       price: 75.5,
       discountPercentage: 20,
-      inStock: true,
+      stockQuantity: 10,
       categories: [
         ALL_CATEGORIES.COMEDY,
         ALL_CATEGORIES.SCIENCE_FICTION,
@@ -46,7 +46,7 @@ function App() {
       author: "מ. לוי",
       price: 120.0,
       discountPercentage: 0,
-      inStock: false,
+      inStock: 0,
       categories: [ALL_CATEGORIES.POPULAR_SCIENCE, ALL_CATEGORIES.ASTRONOMY],
     },
     {
@@ -55,7 +55,7 @@ function App() {
       author: "יעל א.",
       price: 80.0,
       discountPercentage: 15,
-      inStock: true,
+      stockQuantity: 12,
       categories: [
         ALL_CATEGORIES.ADVENTURE,
         ALL_CATEGORIES.CHILDREN,
@@ -68,7 +68,7 @@ function App() {
       author: "שרית פ.",
       price: 95.0,
       discountPercentage: 0,
-      inStock: true,
+      stockQuantity: 22,
       categories: [
         ALL_CATEGORIES.FUTURISM,
         ALL_CATEGORIES.SOCIETY,
