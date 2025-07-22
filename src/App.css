@@ -5,10 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f0f2f5; 
+  background-color: #f0f2f5;
   color: #333;
   direction: rtl;
-  text-align: right; 
+  text-align: right;
 }
 
 .App {
@@ -35,6 +35,26 @@ main.book-list-container {
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; 
+  justify-content: center;
   align-items: flex-start;
+}
+
+.add-book-section {
+  padding: 20px;
+  text-align: center;
+}
+
+.open-form-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.open-form-btn:hover {
+  background-color: #005fa3;
 }

@@ -209,3 +209,20 @@
   text-align: center;
   margin-top: 10px;
 }
+
+
+.delete-book-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.delete-book-button:hover {
+  background-color: #a71d2a;
+}

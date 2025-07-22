@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/BookDisplay.css";
 
-const BookDisplay = ({ book }) => {
+const BookDisplay = ({ book, onDelete, onStockUpdate }) => {
   const {
     title = "כותרת לא ידועה",
     author = null,
@@ -13,22 +13,6 @@ const BookDisplay = ({ book }) => {
 
   const [isConsidering, setIsConsidering] = useState(false);
   const [stockInputValue, setStockInputValue] = useState(stockQuantity);
-
-  const handleStockUpdate = () => {
-    const newAmount = parseInt(stockInputValue, 10);
-    if (isNaN(newAmount) || newAmount < stockQuantity) {
-      alert("נא להזין מספר תקין גדול או שווה לכמות הנוכחית במלאי.");
-      setStockInputValue(stockQuantity);
-      return;
-    }
-    const amountToAdd = newAmount - stockQuantity;
-    if (amountToAdd === 0) {
-      alert("לא נוספה כמות למלאי.");
-      return;
-    }
-    book.stockQuantity += amountToAdd;
-    alert(`הוספת ${amountToAdd} עותקים של ${title} למלאי!`);
-  };
 
   const inStock = stockQuantity > 0; // בדיקה אם הספר במלאי
   const discountedPrice = price * (1 - discountPercentage / 100);
@@ -127,7 +111,19 @@ const BookDisplay = ({ book }) => {
                   }
                 }}
               />
-              <button onClick={handleStockUpdate}>עדכן מלאי</button>
+              <button
+                onClick={() => {
+                  if (stockInputValue && stockInputValue >= stockQuantity) {
+                    onStockUpdate(stockInputValue);
+                  }
+                }}
+              >
+                עדכן מלאי
+              </button>
+
+              <button className="delete-book-button" onClick={onDelete}>
+                הסרת ספר
+              </button>
             </div>
           </>
         ) : (

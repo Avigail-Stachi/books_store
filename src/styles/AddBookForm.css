@@ -1,0 +1,96 @@
+.add-book-form {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  direction: rtl;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.add-book-form label {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #333;
+}
+
+.add-book-form input[type="text"],
+.add-book-form input[type="number"],
+.add-book-form select {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  margin-top: 5px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.add-book-form input[type="text"]:focus,
+.add-book-form input[type="number"]:focus,
+.add-book-form select:focus {
+  border-color: #198754;
+  outline: none;
+  box-shadow: 0 0 5px rgba(25, 135, 84, 0.5);
+}
+
+.add-book-form p {
+  margin: 10px 0 5px 0;
+  font-weight: 600;
+  color: #555;
+}
+
+.add-book-form ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px 0;
+}
+
+.add-book-form ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e9ecef;
+  padding: 6px 10px;
+  margin-bottom: 6px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+.add-book-form ul li button {
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.add-book-form ul li button:hover {
+  color: #a71d2a;
+}
+
+.add-book-form button[type="submit"] {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px 0;
+  font-size: 16px;
+  background-color: #198754;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-book-form button[type="submit"]:hover {
+  background-color: #157347;
+}
