@@ -1,75 +1,52 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const fs = require("fs"); // לטיפול בקבצים
 
 const app = express();
 const PORT = 5000;
+const DATA_File = "./books.json";
 
 app.use(bodyParser.json());
 app.use(cors());
 
-let books = [
-  {
-    id: 1,
-    title: "מסע אל המרחבים",
-    author: "א. כהן",
-    price: 50.0,
-    discountPercentage: 10,
-    stockQuantity: 5,
-    categories: ["מדע בדיוני", "הרפתקאות"],
-    averageRating: 0,
-    ratingCount: 0,
-  },
-  {
-    id: 2,
-    title: "המדריך לגלקסיה",
-    author: null,
-    price: 75.5,
-    discountPercentage: 20,
-    stockQuantity: 10,
-    categories: ["קומדיה", "מדע בדיוני", "פילוסופיה"],
-    averageRating: 0,
-    ratingCount: 0,
-  },
-  {
-    id: 3,
-    title: "סודות היקום",
-    author: "מ. לוי",
-    price: 120.0,
-    discountPercentage: 0,
-    stockQuantity: 0,
-    categories: ["מדע פופולרי", "אסטרונומיה"],
-    averageRating: 0,
-    ratingCount: 0,
-  },
-  {
-    id: 4,
-    title: "ההרפתקה הגדולה",
-    author: "יעל א.",
-    price: 80.0,
-    discountPercentage: 15,
-    stockQuantity: 12,
-    categories: ["הרפתקאות", "ילדים", "פנטזיה"],
-    averageRating: 0,
-    ratingCount: 0,
-  },
-  {
-    id: 5,
-    title: "העולם של מחר",
-    author: "שרית פ.",
-    price: 95.0,
-    discountPercentage: 0,
-    stockQuantity: 22,
-    categories: ["עתידנות", "חברה", "מדע בדיוני"],
-    averageRating: 0,
-    ratingCount: 0,
-  },
-];
+let books = [];
+try {
+  const data = fs.readFileSync(DATA_File, "utf8");
+  books = JSON.parse(data);
+  console.log("Books loaded from json file");
+} catch (error) {
+  if (error.code === "ENOENT") {
+    console.log("Json file not found. starting eith empty aaray");
+    fs.writeFileSync(DATA_File, JSON.stringify([], null, 2), "utf8");
+  } else {
+    console.error("Error loading books from file: ", error);
+  }
+}
+
+const writeBooksToFile = () => {
+  try {
+    fs.writeFileSync(DATA_File, JSON.stringify(books, null, 2), "utf8");
+    console.log("Books saved to file");
+  } catch (error) {
+    console.error("Error saving Books to file: ", error);
+  }
+};
 
 const getNextId = () => {
   if (books.length === 0) return 1;
   return Math.max(...books.map((book) => book.id)) + 1;
 };
+
+let top3BooksCache = [];
+
+const updateTop3BooksCache = () => {
+  const ratedBooks = books.filter((book) => book.ratingCount > 0);
+  ratedBooks.sort((a, b) => b.averageRating - a.averageRating);
+  top3BooksCache = ratedBooks.slice(0, 3);
+};
+
+updateTop3BooksCache();
 
 // שליפת כל הספרים
 app.get("/api/books", (req, res) => {
@@ -101,6 +78,7 @@ app.post("/api/books", (req, res) => {
     ratingCount: 0,
   };
   books.push(newBook);
+  writeBooksToFile();
   res.status(201).json(newBook);
 });
 
@@ -110,8 +88,6 @@ app.put("/api/books/:id", (req, res) => {
   const bookIndex = books.findIndex((b) => b.id === bookId);
 
   if (bookIndex !== -1) {
-    // לצורך פשטות, השדות 'id', 'averageRating', 'ratingCount' אינם מתעדכנים ישירות באמצעות PUT.
-    // שדות אלו מנוהלים על ידי פעולות ספציפיות אחרות (כמו דירוג או לוגיקה פנימית).
     const updatedBook = {
       ...books[bookIndex],
       title:
@@ -136,13 +112,14 @@ app.put("/api/books/:id", (req, res) => {
           : books[bookIndex].categories,
     };
     books[bookIndex] = updatedBook;
+    writeBooksToFile();
     res.json(updatedBook);
   } else {
     res.status(404).send("Book not found");
   }
 });
 
-// (עדכון חלקי) כמות מלאי
+// עדכון כמות מלאי
 app.patch("/api/books/:id/stock", (req, res) => {
   const bookId = parseInt(req.params.id);
   const { newStockQuantity } = req.body;
@@ -155,6 +132,7 @@ app.patch("/api/books/:id/stock", (req, res) => {
 
   if (bookIndex !== -1) {
     books[bookIndex].stockQuantity = newStockQuantity;
+    writeBooksToFile();
     res.json(books[bookIndex]);
   } else {
     res.status(404).send("Book not found");
@@ -183,12 +161,18 @@ app.patch("/api/books/:id/rate", (req, res) => {
       averageRating: newAvg,
       ratingCount: newCount,
     };
+    writeBooksToFile();
+    updateTop3BooksCache();
     res.json(books[bookIndex]);
   } else {
     res.status(404).send("Book not found");
   }
 });
 
+// החזרת שלושת הספרים שבטופ
+app.get("/api/books/top-rated", (req, res) => {
+  res.json(top3BooksCache);
+});
 // מחיקת ספר
 app.delete("/api/books/:id", (req, res) => {
   const bookId = parseInt(req.params.id);
@@ -196,6 +180,8 @@ app.delete("/api/books/:id", (req, res) => {
   books = books.filter((b) => b.id !== bookId);
 
   if (books.length < initialLength) {
+    writeBooksToFile();
+    updateTop3BooksCache();
     res.status(204).send();
   } else {
     res.status(404).send("Book not found");
