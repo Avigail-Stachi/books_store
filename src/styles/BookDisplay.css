@@ -25,7 +25,7 @@
 
 .book-card .book-author {
   color: #666;
-  margin-bottom: 15px; 
+  margin-bottom: 15px;
   min-height: 20px;
   display: flex;
   align-items: center;
@@ -61,7 +61,7 @@
   display: inline-block;
 }
 
-.book-card .price-no-discount-value { 
+.book-card .price-no-discount-value {
   color: #333;
   font-size: 1.2em;
   font-weight: bold;
@@ -133,4 +133,15 @@
   background: linear-gradient(135deg, #e6ffed, #d4f7dc);
   border-color: #28a745;
   box-shadow: 0 4px 8px rgba(40, 167, 69, 0.2);
+}
+
+.book-card.out-of-stock-card {
+  background-color: #f0f0f0;
+  border-color: #c0c0c0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  opacity: 0.8;
+}
+
+.add-to-cart-button.hidden-button {
+  display: none;
 }

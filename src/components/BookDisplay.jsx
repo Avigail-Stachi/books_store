@@ -15,19 +15,35 @@ const BookDisplay = ({ book }) => {
   const displayAuthor = author === null ? "anonymous" : author;
 
   const handleAddToCart = () => {
+    console.log("Book added to cart:", {
+      id: book.id,
+      title: title,
+      author: displayAuthor,
+      price: price,
+      discountPercentage: discountPercentage,
+      discountedPrice: discountedPrice,
+      inStock: inStock,
+      categories: categories,
+    });
     alert(`"הוספת את ${title} לסל!"`);
   };
 
   const hasSignificantDiscount = discountPercentage >= 15;
 
+  // קלאסים דינמיים עבור כרטיס הספר
+  const cardClasses = [
+    "book-card",
+    hasSignificantDiscount && inStock ? "significant-discount" : "", // רק אם יש הנחה וגם במלאי
+    !inStock ? "out-of-stock-card" : "", // אם אזל מהמלאי
+  ]
+    .filter(Boolean)
+    .join(" "); // מסנן קלאסים ריקים ומחבר
+
   return (
-    <div
-      className={`book-card ${
-        hasSignificantDiscount ? "significant-discount" : ""
-      }`}
-    >
+    <div className={cardClasses}>
       <h3>{title}</h3>
       <p className="book-author">מאת: {displayAuthor}</p>
+
       <div className="price-info">
         <span className="price-label-bold">מחיר: </span>
         {discountPercentage > 0 ? (
@@ -44,7 +60,6 @@ const BookDisplay = ({ book }) => {
         )}
       </div>
 
-      {/* הצגת הקטגוריות של הספר */}
       {categories.length > 0 && (
         <div className="book-categories">
           <p className="categories-label">קטגוריות:</p>
@@ -57,13 +72,13 @@ const BookDisplay = ({ book }) => {
       )}
 
       <div className="stock-action-area">
-        {!inStock ? (
-          <p className="out-of-stock-message">הודעה: הספר אזל מהמלאי!</p>
-        ) : (
-          <button onClick={handleAddToCart} className="add-to-cart-button">
-            הוסף לסל
-          </button>
-        )}
+        <button
+          onClick={handleAddToCart}
+          className={`add-to-cart-button ${!inStock ? "hidden-button" : ""}`} // כפתור מוסתר אם אזל
+        >
+          הוסף לסל
+        </button>
+        {!inStock && <p className="out-of-stock-message">הספר אזל מהמלאי!</p>}
       </div>
     </div>
   );
