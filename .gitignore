@@ -1,52 +1,38 @@
-# dependencies
-/node_modules
+node_modules/
 
-# production
-/build
-
-# misc
-.DS_Store
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
 
-# editor folders
-.vscode/
-.idea/
-*.sublime-workspace
-*.sublime-project
 *.log
-
-# Optional: OS-specific
-Thumbs.db
-ehthumbs.db
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# production
-/build
-
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+.DS_Store    # קבצים שמק יוצר
+Thumbs.db    # קבצים שווינדוס יוצר
+.vscode/  
+*.orig       # קבצי גיבוי אוטומטיים
+*.swp        # קבצים זמניים של עורכים (כמו Vim)
+*.bak        # סתם גיבויים
+*.swo        # עוד קבצי Vim
+*.tmp        # קבצים זמניים כלליים
+.cache/      # תיקיות מטמון שונות
+.pnp/        # קבצי תצורה של Yarn Plug'n'Play
+.pnp.js      # עוד קבצי תצורה של Yarn Plug'n'Play
+
+
+/client/build/    
+/client/node_modules/  
+/client/coverage/     
+
+
+/server/node_modules/   
+/server/dist/    
+/server/logs/          
+/server/*.sqlite       
+                      

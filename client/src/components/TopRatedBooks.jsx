@@ -6,7 +6,7 @@ const TopRatedBooks = ({ books }) => {
     return (
       <div className="top-rated-container">
         <h2>הספרים המדורגים ביותר (טופ 3)</h2>
-        <p>טוען ספרים או שאין ספרים זמינים לדירוג.</p>
+        <p>אין ספרים זמינים כרגע או שטרם דורגו </p>
       </div>
     );
   }
