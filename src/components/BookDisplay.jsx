@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/BookDisplay.css";
 
-const BookDisplay = ({ book, onDelete, onStockUpdate }) => {
+const BookDisplay = ({ book, onDelete, onStockUpdate, onRate }) => {
   const {
     title = "כותרת לא ידועה",
     author = null,
@@ -78,6 +78,28 @@ const BookDisplay = ({ book, onDelete, onStockUpdate }) => {
           </ul>
         </div>
       )}
+      <div className="book-rating">
+        <p>
+          דירוג ממוצע:{" "}
+          {book.ratingCount === 0
+            ? "אין דירוג עדיין"
+            : `${book.averageRating.toFixed(1)} (${book.ratingCount} מדרגים)`}
+        </p>
+
+        <div className="rating-buttons">
+          דרג את הספר:
+          {[1, 2, 3, 4, 5].map((num) => (
+            <button
+              key={num}
+              onClick={() => {
+                onRate(num);
+              }}
+            >
+              {num}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <div className="stock-action-area">
         {/* {stockQuantity > 0 && (

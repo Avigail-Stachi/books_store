@@ -35,6 +35,8 @@ function App() {
       discountPercentage: 10,
       stockQuantity: 5,
       categories: [ALL_CATEGORIES.SCIENCE_FICTION, ALL_CATEGORIES.ADVENTURE],
+      averageRating: 0,
+      ratingCount: 0,
     },
     {
       id: 2,
@@ -48,6 +50,8 @@ function App() {
         ALL_CATEGORIES.SCIENCE_FICTION,
         ALL_CATEGORIES.PHILOSOPHY,
       ],
+      averageRating: 0,
+      ratingCount: 0,
     },
     {
       id: 3,
@@ -57,6 +61,8 @@ function App() {
       discountPercentage: 0,
       stockQuantity: 0,
       categories: [ALL_CATEGORIES.POPULAR_SCIENCE, ALL_CATEGORIES.ASTRONOMY],
+      averageRating: 0,
+      ratingCount: 0,
     },
     {
       id: 4,
@@ -70,6 +76,8 @@ function App() {
         ALL_CATEGORIES.CHILDREN,
         ALL_CATEGORIES.FANTASY,
       ],
+      averageRating: 0,
+      ratingCount: 0,
     },
     {
       id: 5,
@@ -83,6 +91,8 @@ function App() {
         ALL_CATEGORIES.SOCIETY,
         ALL_CATEGORIES.SCIENCE_FICTION,
       ],
+      averageRating: 0,
+      ratingCount: 0,
     },
   ]);
   const [showForm, setShowForm] = useState(false);
@@ -95,6 +105,24 @@ function App() {
   };
   const handleDeleteBook = (bookId) => {
     setBooks((prevBooks) => prevBooks.filter((book) => book.id !== bookId));
+  };
+
+  const handleRateBook = (bookId, newRating) => {
+    setBooks((prevBooks) =>
+      prevBooks.map((book) => {
+        if (book.id !== bookId) return book;
+
+        const total = book.averageRating * book.ratingCount;
+        const newCount = book.ratingCount + 1;
+        const newAvg = (total + newRating) / newCount;
+
+        return {
+          ...book,
+          averageRating: newAvg,
+          ratingCount: newCount,
+        };
+      })
+    );
   };
 
   return (
@@ -126,6 +154,7 @@ function App() {
             book={book}
             onDelete={() => handleDeleteBook(book.id)}
             onStockUpdate={(newStock) => handleStockUpdate(book.id, newStock)}
+            onRate={(rating) => handleRateBook(book.id, rating)}
           />
         ))}
       </main>

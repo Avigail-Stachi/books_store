@@ -226,3 +226,14 @@
 .delete-book-button:hover {
   background-color: #a71d2a;
 }
+
+.book-rating {
+  margin-top: 10px;
+  text-align: right;
+}
+
+.rating-buttons button {
+  margin: 0 4px;
+  cursor: pointer;
+}
+
