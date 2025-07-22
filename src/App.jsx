@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import "./App.css";
+import "./styles/App.css";
 import BookDisplay from "./components/BookDisplay";
 import AddBookForm from "./components/AddBookForm";
+import TopRatedBooks from "./components/TopRatedBooks";
 
 function App() {
   const handleStockUpdate = (bookId, newStockQuantity) => {
@@ -130,6 +131,8 @@ function App() {
       <header className="App-header">
         <h1>חנות ספרים</h1>
       </header>
+
+      <TopRatedBooks books={books} />
 
       <section className="add-book-section">
         <button

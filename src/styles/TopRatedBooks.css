@@ -1,0 +1,42 @@
+.top-rated-container {
+  background-color: #f0f0f0;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 800px;
+  text-align: center;
+}
+
+.top-rated-container h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.top-rated-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.top-rated-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-rated-title {
+  font-weight: bold;
+  color: #0056b3;
+}
+
+.top-rated-rating {
+  font-style: italic;
+  color: #666;
+}
