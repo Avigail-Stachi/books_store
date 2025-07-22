@@ -1,0 +1,46 @@
+
+.personal-info-card {
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  background-color: #fff;
+}
+
+.personal-info-card h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.personal-info-card p {
+  margin-bottom: 10px;
+  color: #555;
+  font-size: 1.1em;
+}
+
+.personal-info-card p strong {
+  color: #000;
+}
+
+.console-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 1em;
+  transition: background-color 0.3s ease; /* אנימציה למעבר צבע */
+}
+
+.console-button:hover {
+  background-color: #0056b3; /* שינוי צבע בלחיצה/ריחוף */
+}
+
+.console-button:active {
+  background-color: #004085;
+}
