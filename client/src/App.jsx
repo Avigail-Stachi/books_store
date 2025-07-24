@@ -1,17 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles/App.css";
 import BookDisplay from "./components/BookDisplay";
 import AddBookForm from "./components/AddBookForm";
 import TopRatedBooks from "./components/TopRatedBooks";
 
 function App() {
-  const handleStockUpdate = (bookId, newStockQuantity) => {
-    setBooks((prevBooks) =>
-      prevBooks.map((book) =>
-        book.id === bookId ? { ...book, stockQuantity: newStockQuantity } : book
-      )
-    );
-  };
+  const API_BASE_URL = "http://localhost:5000/api";
 
   // הגדרת כל הקטגוריות האפשריות במערך אחד
   const ALL_CATEGORIES = {
@@ -27,104 +21,133 @@ function App() {
     SOCIETY: "חברה",
   };
 
-  const [books, setBooks] = useState([
-    {
-      id: 1,
-      title: "מסע אל המרחבים",
-      author: "א. כהן",
-      price: 50.0,
-      discountPercentage: 10,
-      stockQuantity: 5,
-      categories: [ALL_CATEGORIES.SCIENCE_FICTION, ALL_CATEGORIES.ADVENTURE],
-      averageRating: 0,
-      ratingCount: 0,
-    },
-    {
-      id: 2,
-      title: "המדריך לגלקסיה",
-      author: null,
-      price: 75.5,
-      discountPercentage: 20,
-      stockQuantity: 10,
-      categories: [
-        ALL_CATEGORIES.COMEDY,
-        ALL_CATEGORIES.SCIENCE_FICTION,
-        ALL_CATEGORIES.PHILOSOPHY,
-      ],
-      averageRating: 0,
-      ratingCount: 0,
-    },
-    {
-      id: 3,
-      title: "סודות היקום",
-      author: "מ. לוי",
-      price: 120.0,
-      discountPercentage: 0,
-      stockQuantity: 0,
-      categories: [ALL_CATEGORIES.POPULAR_SCIENCE, ALL_CATEGORIES.ASTRONOMY],
-      averageRating: 0,
-      ratingCount: 0,
-    },
-    {
-      id: 4,
-      title: "ההרפתקה הגדולה",
-      author: "יעל א.",
-      price: 80.0,
-      discountPercentage: 15,
-      stockQuantity: 12,
-      categories: [
-        ALL_CATEGORIES.ADVENTURE,
-        ALL_CATEGORIES.CHILDREN,
-        ALL_CATEGORIES.FANTASY,
-      ],
-      averageRating: 0,
-      ratingCount: 0,
-    },
-    {
-      id: 5,
-      title: "העולם של מחר",
-      author: "שרית פ.",
-      price: 95.0,
-      discountPercentage: 0,
-      stockQuantity: 22,
-      categories: [
-        ALL_CATEGORIES.FUTURISM,
-        ALL_CATEGORIES.SOCIETY,
-        ALL_CATEGORIES.SCIENCE_FICTION,
-      ],
-      averageRating: 0,
-      ratingCount: 0,
-    },
-  ]);
+  const [books, setBooks] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [topRatedRefresh, setTopRatedRefresh] = useState(0);
 
-  //הוספת ספר חדש
-  const handleAddBook = (newBook) => {
-    const bookWithId = { ...newBook, id: Date.now() }; // מזהה ייחודי
-    setBooks((prev) => [...prev, bookWithId]);
-    setShowForm(false); // סגירת הטופס לאחר הוספת הספר
+  // טעינת ספרים מהשרת
+  const fetchBooks = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/books`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch books");
+      }
+      const data = await response.json();
+      setBooks(data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching books:", error);
+      setLoading(false);
+    }
   };
-  const handleDeleteBook = (bookId) => {
-    setBooks((prevBooks) => prevBooks.filter((book) => book.id !== bookId));
+
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+
+  const handleStockUpdate = async (bookId, newStockQuantity) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/books/${bookId}/stock`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ newStockQuantity }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update stock");
+      }
+
+      const updatedBook = await response.json();
+      setBooks((prevBooks) =>
+        prevBooks.map((book) => (book.id === bookId ? updatedBook : book))
+      );
+      // מעדכן את רשימת הטופ 3
+      setTopRatedRefresh((prev) => prev + 1);
+    } catch (error) {
+      console.error("Error updating stock:", error);
+      alert("שגיאה בעדכון המלאי");
+    }
   };
 
-  const handleRateBook = (bookId, newRating) => {
-    setBooks((prevBooks) =>
-      prevBooks.map((book) => {
-        if (book.id !== bookId) return book;
+  // הוספת ספר חדש
+  const handleAddBook = async (newBook) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/books`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newBook),
+      });
 
-        const total = book.averageRating * book.ratingCount;
-        const newCount = book.ratingCount + 1;
-        const newAvg = (total + newRating) / newCount;
+      if (!response.ok) {
+        throw new Error("Failed to add book");
+      }
 
-        return {
-          ...book,
-          averageRating: newAvg,
-          ratingCount: newCount,
-        };
-      })
+      const addedBook = await response.json();
+      setBooks((prev) => [...prev, addedBook]);
+      setShowForm(false); // סגירת הטופס לאחר הוספת הספר
+    } catch (error) {
+      console.error("Error adding book:", error);
+      alert("שגיאה בהוספת הספר");
+    }
+  };
+
+  const handleDeleteBook = async (bookId) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/books/${bookId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete book");
+      }
+
+      setBooks((prevBooks) => prevBooks.filter((book) => book.id !== bookId));
+    } catch (error) {
+      console.error("Error deleting book:", error);
+      alert("שגיאה במחיקת הספר");
+    }
+  };
+
+  const handleRateBook = async (bookId, newRating) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/books/${bookId}/rate`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ rating: newRating }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to rate book");
+      }
+
+      const updatedBook = await response.json();
+      setBooks((prevBooks) =>
+        prevBooks.map((book) => (book.id === bookId ? updatedBook : book))
+      );
+      setTopRatedRefresh((prev) => prev + 1);
+    } catch (error) {
+      console.error("Error rating book:", error);
+      alert("שגיאה בדירוג הספר");
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1>חנות ספרים</h1>
+        </header>
+        <p>טוען ספרים...</p>
+      </div>
     );
-  };
+  }
 
   return (
     <div className="App">
@@ -132,7 +155,7 @@ function App() {
         <h1>חנות ספרים</h1>
       </header>
 
-      <TopRatedBooks books={books} />
+      <TopRatedBooks refreshTrigger={topRatedRefresh} />
 
       <section className="add-book-section">
         <button

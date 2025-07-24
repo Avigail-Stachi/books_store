@@ -3,12 +3,15 @@
     "id": 1,
     "title": "מסע אל המרחבים",
     "author": "א. כהן",
-    "price": 50.0,
+    "price": 50,
     "discountPercentage": 10,
     "stockQuantity": 5,
-    "categories": ["מדע בדיוני", "הרפתקאות"],
-    "averageRating": 0,
-    "ratingCount": 0
+    "categories": [
+      "מדע בדיוני",
+      "הרפתקאות"
+    ],
+    "averageRating": 4.8,
+    "ratingCount": 41
   },
   {
     "id": 2,
@@ -17,41 +20,56 @@
     "price": 75.5,
     "discountPercentage": 20,
     "stockQuantity": 10,
-    "categories": ["קומדיה", "מדע בדיוני", "פילוסופיה"],
-    "averageRating": 0,
-    "ratingCount": 0
+    "categories": [
+      "קומדיה",
+      "מדע בדיוני",
+      "פילוסופיה"
+    ],
+    "averageRating": 4,
+    "ratingCount": 1
   },
   {
     "id": 3,
     "title": "סודות היקום",
     "author": "מ. לוי",
-    "price": 120.0,
+    "price": 120,
     "discountPercentage": 0,
     "stockQuantity": 0,
-    "categories": ["מדע פופולרי", "אסטרונומיה"],
-    "averageRating": 0,
-    "ratingCount": 0
+    "categories": [
+      "מדע פופולרי",
+      "אסטרונומיה"
+    ],
+    "averageRating": 4,
+    "ratingCount": 1
   },
   {
     "id": 4,
     "title": "ההרפתקה הגדולה",
     "author": "יעל א.",
-    "price": 80.0,
+    "price": 80,
     "discountPercentage": 15,
     "stockQuantity": 12,
-    "categories": ["הרפתקאות", "ילדים", "פנטזיה"],
-    "averageRating": 0,
-    "ratingCount": 0
+    "categories": [
+      "הרפתקאות",
+      "ילדים",
+      "פנטזיה"
+    ],
+    "averageRating": 5,
+    "ratingCount": 2
   },
   {
     "id": 5,
     "title": "העולם של מחר",
     "author": "שרית פ.",
-    "price": 95.0,
+    "price": 95,
     "discountPercentage": 0,
     "stockQuantity": 22,
-    "categories": ["עתידנות", "חברה", "מדע בדיוני"],
-    "averageRating": 0,
-    "ratingCount": 0
+    "categories": [
+      "עתידנות",
+      "חברה",
+      "מדע בדיוני"
+    ],
+    "averageRating": 5,
+    "ratingCount": 3
   }
 ]

@@ -9,6 +9,8 @@ const BookDisplay = ({ book, onDelete, onStockUpdate, onRate }) => {
     discountPercentage = 0,
     stockQuantity = 0,
     categories = [],
+    averageRating = 0,
+    ratingCount = 0,
   } = book;
 
   const [isConsidering, setIsConsidering] = useState(false);
@@ -47,6 +49,16 @@ const BookDisplay = ({ book, onDelete, onStockUpdate, onRate }) => {
   ]
     .filter(Boolean)
     .join(" "); // מסנן קלאסים ריקים ומחבר
+
+  const handleRating = (rating) => {
+    console.log(`Rating book ${book.id} (${book.title}) with ${rating} stars`);
+    console.log(`Current book rating data:`, {
+      averageRating: book.averageRating,
+      ratingCount: book.ratingCount,
+    });
+    onRate(rating);
+  };
+
   return (
     <div className={cardClasses}>
       <h3>{title}</h3>
@@ -78,12 +90,13 @@ const BookDisplay = ({ book, onDelete, onStockUpdate, onRate }) => {
           </ul>
         </div>
       )}
+
       <div className="book-rating">
         <p>
           דירוג ממוצע:{" "}
-          {book.ratingCount === 0
+          {ratingCount === 0
             ? "אין דירוג עדיין"
-            : `${book.averageRating.toFixed(1)} (${book.ratingCount} מדרגים)`}
+            : `${averageRating.toFixed(1)} (${ratingCount} מדרגים)`}
         </p>
 
         <div className="rating-buttons">
@@ -91,9 +104,8 @@ const BookDisplay = ({ book, onDelete, onStockUpdate, onRate }) => {
           {[1, 2, 3, 4, 5].map((num) => (
             <button
               key={num}
-              onClick={() => {
-                onRate(num);
-              }}
+              onClick={() => handleRating(num)}
+              className="rating-button"
             >
               {num}
             </button>
@@ -102,10 +114,6 @@ const BookDisplay = ({ book, onDelete, onStockUpdate, onRate }) => {
       </div>
 
       <div className="stock-action-area">
-        {/* {stockQuantity > 0 && (
-    <p className="stock-info">כמות במלאי: {stockQuantity}</p>
-  )} */}
-
         {inStock ? (
           <>
             <div className="buttons-row">

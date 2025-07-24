@@ -17,7 +17,7 @@ try {
   console.log("Books loaded from json file");
 } catch (error) {
   if (error.code === "ENOENT") {
-    console.log("Json file not found. starting eith empty aaray");
+    console.log("Json file not found. starting with empty array");
     fs.writeFileSync(DATA_File, JSON.stringify([], null, 2), "utf8");
   } else {
     console.error("Error loading books from file: ", error);
@@ -25,6 +25,7 @@ try {
 }
 
 const writeBooksToFile = () => {
+  console.log("Writing books to file...");
   try {
     fs.writeFileSync(DATA_File, JSON.stringify(books, null, 2), "utf8");
     console.log("Books saved to file");
@@ -42,8 +43,24 @@ let top3BooksCache = [];
 
 const updateTop3BooksCache = () => {
   const ratedBooks = books.filter((book) => book.ratingCount > 0);
-  ratedBooks.sort((a, b) => b.averageRating - a.averageRating);
+  // מיון לפי דירוג ממוצע ואז לפי כמות דירוגים
+  ratedBooks.sort((a, b) => {
+    // ראשית מיון לפי דירוג ממוצע (גבוה יותר ראשון)
+    if (b.averageRating !== a.averageRating) {
+      return b.averageRating - a.averageRating;
+    }
+    // אם הדירוג זהה, מיון לפי כמות דירוגים (יותר דירוגים ראשון)
+    return b.ratingCount - a.ratingCount;
+  });
   top3BooksCache = ratedBooks.slice(0, 3);
+  console.log(
+    "Top 3 books cache updated:",
+    top3BooksCache.map((b) => ({
+      title: b.title,
+      rating: b.averageRating,
+      count: b.ratingCount,
+    }))
+  );
 };
 
 updateTop3BooksCache();
@@ -51,6 +68,11 @@ updateTop3BooksCache();
 // שליפת כל הספרים
 app.get("/api/books", (req, res) => {
   res.json(books);
+});
+
+// החזרת שלושת הספרים שבטופ
+app.get("/api/books/top-rated", (req, res) => {
+  res.json(top3BooksCache);
 });
 
 // שליפת ספר לפי ID
@@ -144,35 +166,51 @@ app.patch("/api/books/:id/rate", (req, res) => {
   const bookId = parseInt(req.params.id);
   const { rating } = req.body;
 
+  console.log(
+    `Received rating request for book ${bookId} with rating ${rating}`
+  );
+
   if (typeof rating !== "number" || rating < 1 || rating > 5) {
     return res
       .status(400)
       .send("Invalid rating provided. Rating must be between 1 and 5.");
   }
+
   const bookIndex = books.findIndex((b) => b.id === bookId);
   if (bookIndex !== -1) {
     const book = books[bookIndex];
+    console.log(`Current book data:`, {
+      title: book.title,
+      averageRating: book.averageRating,
+      ratingCount: book.ratingCount,
+    });
+
     const total = book.averageRating * book.ratingCount;
     const newCount = book.ratingCount + 1;
     const newAvg = (total + rating) / newCount;
 
     books[bookIndex] = {
       ...book,
-      averageRating: newAvg,
+      averageRating: Math.round(newAvg * 10) / 10, // עיגול לעשירית
       ratingCount: newCount,
     };
+
+    console.log(`Updated book data:`, {
+      title: books[bookIndex].title,
+      averageRating: books[bookIndex].averageRating,
+      ratingCount: books[bookIndex].ratingCount,
+    });
+
     writeBooksToFile();
     updateTop3BooksCache();
+
+    // מחזיר את הספר המעודכן במלואו
     res.json(books[bookIndex]);
   } else {
     res.status(404).send("Book not found");
   }
 });
 
-// החזרת שלושת הספרים שבטופ
-app.get("/api/books/top-rated", (req, res) => {
-  res.json(top3BooksCache);
-});
 // מחיקת ספר
 app.delete("/api/books/:id", (req, res) => {
   const bookId = parseInt(req.params.id);
