@@ -25,15 +25,28 @@ const TopRatedBooks = ({ refreshTrigger }) => {
     fetchTopRatedBooks();
   }, [refreshTrigger]);
 
+  // if (loading) {
+  //   return <p>טוען את הספרים המדורגים...</p>;
+  // }
   if (loading) {
-    return <p>טוען את הספרים המדורגים...</p>;
+    return (
+      <div className="top-rated-container">
+        <h2>הספרים המדורגים ביותר</h2>
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p className="loading-text">טוען את הספרים המדורגים...</p>
+        </div>
+      </div>
+    );
   }
 
   if (!Array.isArray(topBooks) || topBooks.length === 0) {
     return (
       <div className="top-rated-container">
         <h2>הספרים המדורגים ביותר (טופ 3)</h2>
-        <p>אין ספרים זמינים כרגע או שטרם דורגו</p>
+        <div className="no-books-message">
+          אין ספרים זמינים כרגע או שטרם דורגו
+        </div>
       </div>
     );
   }

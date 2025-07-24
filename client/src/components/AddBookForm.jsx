@@ -162,7 +162,7 @@ function AddBookForm({ onAddBook, allCategories }) {
       </label>
 
       {selectedCategory === "other" && (
-        <label style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+        <div className="custom-category-container">
           <input
             type="text"
             placeholder="הקלד קטגוריה חדשה"
@@ -176,7 +176,7 @@ function AddBookForm({ onAddBook, allCategories }) {
           >
             הוסף קטגוריה
           </button>
-        </label>
+        </div>
       )}
 
       {formData.categories.length > 0 && (

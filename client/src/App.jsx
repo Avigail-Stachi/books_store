@@ -144,7 +144,10 @@ function App() {
         <header className="App-header">
           <h1>חנות ספרים</h1>
         </header>
-        <p>טוען ספרים...</p>
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p className="loading-text">טוען ספרים...</p>
+        </div>
       </div>
     );
   }
