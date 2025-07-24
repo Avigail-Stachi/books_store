@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import "./styles/App.css";
-import Navbar from "./components/Navbar";
+import "./styles/App.css"; // עדיין תוכל להשתמש בזה לעיצובים גלובליים
+import Layout from "./components/Layout"; // ייבא את קומפוננטת ה-Layout החדשה
 import HomePage from "./pages/HomePage";
 import BooksPage from "./pages/BooksPage";
 import AddBookPage from "./pages/AddBookPage";
@@ -136,13 +136,8 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>חנות ספרים</h1>
-      </header>
-
-      <Navbar />
-
+    // עוטפים את ה-Routes בקומפוננטת Layout
+    <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
@@ -172,7 +167,7 @@ function App() {
         />
         <Route path="*" element={<HomePage />} />
       </Routes>
-    </div>
+    </Layout>
   );
 }
 

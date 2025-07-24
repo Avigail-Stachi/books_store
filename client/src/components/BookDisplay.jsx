@@ -1,3 +1,4 @@
+// src/components/BookDisplay.jsx
 import React, { useState } from "react";
 import "../styles/BookDisplay.css";
 
@@ -15,8 +16,9 @@ const BookDisplay = ({ book, onDelete, onStockUpdate, onRate }) => {
 
   const [isConsidering, setIsConsidering] = useState(false);
   const [stockInputValue, setStockInputValue] = useState(stockQuantity);
+  const [showRating, setShowRating] = useState(false); // מצב חדש לשליטה בהצגת הדירוג
 
-  const inStock = stockQuantity > 0; // בדיקה אם הספר במלאי
+  const inStock = stockQuantity > 0;
   const discountedPrice = price * (1 - discountPercentage / 100);
   const displayAuthor = author === null ? "anonymous" : author;
 
@@ -38,86 +40,99 @@ const BookDisplay = ({ book, onDelete, onStockUpdate, onRate }) => {
     setIsConsidering((prev) => !prev);
   };
 
-  const hasSignificantDiscount = discountPercentage >= 15;
-
-  // קלאסים דינמיים עבור כרטיס הספר
-  const cardClasses = [
-    "book-card",
-    hasSignificantDiscount && inStock ? "significant-discount" : "", // רק אם יש הנחה וגם במלאי
-    !inStock ? "out-of-stock-card" : "", // אם אזל מהמלאי
-    isConsidering ? "considering-card" : "",
-  ]
-    .filter(Boolean)
-    .join(" "); // מסנן קלאסים ריקים ומחבר
-
-  const handleRating = (rating) => {
-    console.log(`Rating book ${book.id} (${book.title}) with ${rating} stars`);
-    console.log(`Current book rating data:`, {
-      averageRating: book.averageRating,
-      ratingCount: book.ratingCount,
-    });
-    onRate(rating);
+  // פונקציה לשינוי מצב הצגת הדירוג (תקרא כאשר הצ'קבוקס משתנה)
+  const handleToggleRatingChange = () => {
+    setShowRating((prev) => !prev);
   };
 
-  return (
-    <div className={cardClasses}>
-      <h3>{title}</h3>
-      <p className="book-author">מאת: {displayAuthor}</p>
+  const hasSignificantDiscount = discountPercentage >= 15 && price > 0;
 
-      <div className="price-info">
-        <span className="price-label-bold">מחיר: </span>
+  return (
+    <div
+      className={`book-card ${
+        hasSignificantDiscount ? "significant-discount" : ""
+      } ${!inStock ? "out-of-stock-card" : ""} ${
+        isConsidering ? "considering-card" : ""
+      }`}
+    >
+      <h3>{title}</h3>
+      <p>
+        <strong>מאת:</strong> {displayAuthor}
+      </p>
+      <div className="category-list">
+        {categories.map((cat, index) => (
+          <span key={index} className="category-tag">
+            {cat}
+          </span>
+        ))}
+      </div>
+      <p>
+        <strong>מחיר:</strong>{" "}
         {discountPercentage > 0 ? (
           <>
-            <span className="original-price">{price.toFixed(2)} ש"ח</span>
+            <span className="original-price">{price.toFixed(2)} ₪</span>{" "}
             <span className="discounted-price">
-              {discountedPrice.toFixed(2)} ש"ח
+              {discountedPrice.toFixed(2)} ₪
+            </span>{" "}
+            <span className="discount-percentage">
+              ({discountPercentage}% הנחה)
             </span>
           </>
         ) : (
-          <span className="price-no-discount-value">
-            {price.toFixed(2)} ש"ח
-          </span>
+          `${price.toFixed(2)} ₪`
         )}
+      </p>
+
+      {/* תצוגת דירוג ממוצע קיימת */}
+      {averageRating > 0 ? (
+        <p className="average-rating">
+          דירוג ממוצע: {averageRating.toFixed(1)} ({ratingCount} דירוגים)
+        </p>
+      ) : (
+        <p className="no-rating">עדיין לא דורג</p>
+      )}
+
+      {/* מתג ה-ON/OFF החדש */}
+      <div className="toggle-rating-container">
+        <span className="toggle-label">דרג ספר:</span>
+        <label className="switch">
+          <input
+            type="checkbox"
+            checked={showRating}
+            onChange={handleToggleRatingChange}
+          />
+          <span className="slider round"></span>
+        </label>
       </div>
 
-      {categories.length > 0 && (
-        <div className="book-categories">
-          <p className="categories-label">קטגוריות:</p>
-          <ul className="categories-list">
-            {categories.map((category, index) => (
-              <li key={index}>{category}</li>
-            ))}
-          </ul>
+      {/* תנאי להצגת כלי הדירוג */}
+      {showRating && (
+        <div className="rating-section">
+          <label>
+            דרג ספר (1-5):
+            <select
+              onChange={(e) => onRate(parseInt(e.target.value))}
+              className="rating-select"
+            >
+              <option value="">בחר דירוג</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </label>
         </div>
       )}
 
-      <div className="book-rating">
-        <p>
-          דירוג ממוצע:{" "}
-          {ratingCount === 0
-            ? "אין דירוג עדיין"
-            : `${averageRating.toFixed(1)} (${ratingCount} מדרגים)`}
-        </p>
-
-        <div className="rating-buttons">
-          דרג את הספר:
-          {[1, 2, 3, 4, 5].map((num) => (
-            <button
-              key={num}
-              onClick={() => handleRating(num)}
-              className="rating-button"
-            >
-              {num}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="stock-action-area">
+      <div className="book-actions">
         {inStock ? (
           <>
-            <div className="buttons-row">
-              <button onClick={handleAddToCart} className="add-to-cart-button">
+            <p>
+              <strong>מלאי:</strong> {stockQuantity}
+            </p>
+            <div className="action-buttons">
+              <button className="add-to-cart-button" onClick={handleAddToCart}>
                 הוסף לסל
               </button>
               <button className="consider-button" onClick={switchConsideration}>

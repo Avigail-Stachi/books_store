@@ -313,3 +313,96 @@
     max-width: 180px;
   }
 }
+
+/* src/styles/BookDisplay.css */
+
+/* ... (הקוד הקיים שלך) ... */
+
+/* סגנון למתג ON/OFF */
+.toggle-rating-container {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* מרכז את המתג */
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.toggle-label {
+  margin-right: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* הסתר את ה-checkbox המקורי */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* סגנון למעגל/slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 34px; /* יוצר צורה מעוגלת */
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 50%; /* יוצר את העיגול הזז */
+}
+
+input:checked + .slider {
+  background-color: #8b5cf6; /* צבע סגול כשהוא ON */
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #8b5cf6;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px); /* מזיז את העיגול ימינה */
+}
+
+/* סגנונות למקטע הדירוג */
+.rating-section {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.rating-select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-left: 5px;
+  font-size: 1em;
+  width: 100%; /* כדי שימלא את הרוחב */
+  max-width: 150px; /* רוחב מוגבל */
+}
+
+/* ... (שאר ה-CSS שלך) ... */
