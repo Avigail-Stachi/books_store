@@ -54,8 +54,8 @@
       "ילדים",
       "פנטזיה"
     ],
-    "averageRating": 5,
-    "ratingCount": 2
+    "averageRating": 4.7,
+    "ratingCount": 3
   },
   {
     "id": 5,
@@ -71,5 +71,32 @@
     ],
     "averageRating": 5,
     "ratingCount": 3
+  },
+  {
+    "id": 6,
+    "title": "משהו",
+    "author": "מישהו",
+    "price": 44,
+    "discountPercentage": 7,
+    "stockQuantity": 2,
+    "categories": [
+      "אסטרונומיה",
+      "אא"
+    ],
+    "averageRating": 0,
+    "ratingCount": 0
+  },
+  {
+    "id": 7,
+    "title": "א",
+    "author": "ו",
+    "price": 7,
+    "discountPercentage": -26,
+    "stockQuantity": 9,
+    "categories": [
+      "פנטזיה"
+    ],
+    "averageRating": 0,
+    "ratingCount": 0
   }
 ]

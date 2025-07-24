@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 import "./styles/App.css";
-import BookDisplay from "./components/BookDisplay";
-import AddBookForm from "./components/AddBookForm";
-import TopRatedBooks from "./components/TopRatedBooks";
+import Navbar from "./components/Navbar";
+import HomePage from "./pages/HomePage";
+import BooksPage from "./pages/BooksPage";
+import AddBookPage from "./pages/AddBookPage";
+import TopRatedPage from "./pages/TopRatedPage";
 
 function App() {
   const API_BASE_URL = "http://localhost:5000/api";
 
-  // הגדרת כל הקטגוריות האפשריות במערך אחד
   const ALL_CATEGORIES = {
     SCIENCE_FICTION: "מדע בדיוני",
     ADVENTURE: "הרפתקאות",
@@ -22,11 +24,9 @@ function App() {
   };
 
   const [books, setBooks] = useState([]);
-  const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
   const [topRatedRefresh, setTopRatedRefresh] = useState(0);
 
-  // טעינת ספרים מהשרת
   const fetchBooks = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/books`);
@@ -64,7 +64,6 @@ function App() {
       setBooks((prevBooks) =>
         prevBooks.map((book) => (book.id === bookId ? updatedBook : book))
       );
-      // מעדכן את רשימת הטופ 3
       setTopRatedRefresh((prev) => prev + 1);
     } catch (error) {
       console.error("Error updating stock:", error);
@@ -72,7 +71,6 @@ function App() {
     }
   };
 
-  // הוספת ספר חדש
   const handleAddBook = async (newBook) => {
     try {
       const response = await fetch(`${API_BASE_URL}/books`, {
@@ -89,7 +87,6 @@ function App() {
 
       const addedBook = await response.json();
       setBooks((prev) => [...prev, addedBook]);
-      setShowForm(false); // סגירת הטופס לאחר הוספת הספר
     } catch (error) {
       console.error("Error adding book:", error);
       alert("שגיאה בהוספת הספר");
@@ -138,55 +135,43 @@ function App() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1>חנות ספרים</h1>
-        </header>
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p className="loading-text">טוען ספרים...</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="App">
       <header className="App-header">
         <h1>חנות ספרים</h1>
       </header>
 
-      <TopRatedBooks refreshTrigger={topRatedRefresh} />
+      <Navbar />
 
-      <section className="add-book-section">
-        <button
-          className="open-form-btn"
-          onClick={() => setShowForm(!showForm)}
-        >
-          {showForm ? "סגור טופס הוספה" : "הוסף ספר חדש"}
-        </button>
-
-        {showForm && (
-          <AddBookForm
-            onAddBook={handleAddBook}
-            allCategories={Object.values(ALL_CATEGORIES)}
-          />
-        )}
-      </section>
-
-      <main className="book-list-container">
-        {books.map((book) => (
-          <BookDisplay
-            key={book.id}
-            book={book}
-            onDelete={() => handleDeleteBook(book.id)}
-            onStockUpdate={(newStock) => handleStockUpdate(book.id, newStock)}
-            onRate={(rating) => handleRateBook(book.id, rating)}
-          />
-        ))}
-      </main>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/books"
+          element={
+            <BooksPage
+              books={books}
+              loading={loading}
+              onDelete={handleDeleteBook}
+              onStockUpdate={handleStockUpdate}
+              onRate={handleRateBook}
+            />
+          }
+        />
+        <Route
+          path="/add-book"
+          element={
+            <AddBookPage
+              onAddBook={handleAddBook}
+              allCategories={Object.values(ALL_CATEGORIES)}
+            />
+          }
+        />
+        <Route
+          path="/top-rated"
+          element={<TopRatedPage refreshTrigger={topRatedRefresh} />}
+        />
+        <Route path="*" element={<HomePage />} />
+      </Routes>
     </div>
   );
 }

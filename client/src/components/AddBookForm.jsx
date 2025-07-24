@@ -4,7 +4,7 @@ import "../styles/AddBookForm.css";
 function AddBookForm({ onAddBook, allCategories }) {
   const [formData, setFormData] = useState({
     title: "",
-    author: "",
+    author: "anonymous",
     price: "",
     discountPercentage: 0,
     stockQuantity: 0,
@@ -82,7 +82,7 @@ function AddBookForm({ onAddBook, allCategories }) {
 
     setFormData({
       title: "",
-      author: "",
+      author: "anonymous",
       price: "",
       discountPercentage: 0,
       stockQuantity: 0,

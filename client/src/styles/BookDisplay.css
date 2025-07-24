@@ -1,128 +1,110 @@
 .book-card {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  width: 300px;
-  min-height: 450px;
+  background: linear-gradient(135deg, #ffffff 0%, #faf7ff 100%);
+  border: 1px solid #e9d8fd;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.05);
+  width: 280px;
+  min-height: 420px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.book-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #667eea, #764ba2);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.book-card:hover::before {
-  transform: scaleX(1);
 }
 
 .book-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.15);
+  border-color: #c4b5fd;
 }
 
 .book-card h3 {
-  color: #2c3e50;
+  color: #6b46c1;
   margin-top: 0;
-  font-size: 1.6em;
-  font-weight: 700;
-  min-height: 50px;
+  font-size: 1.4em;
+  font-weight: 600;
+  min-height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 1.3;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .book-card .book-author {
-  color: #7f8c8d;
-  font-size: 1.1em;
-  margin-bottom: 20px;
+  color: #6b7280;
+  font-size: 1em;
+  margin-bottom: 15px;
   font-style: italic;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .price-info {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   text-align: center;
-  padding: 15px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 15px;
+  padding: 12px;
+  background: linear-gradient(135deg, #f1f5f9 0%, #f8fafc 100%);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
+  border: 1px solid #e2e8f0;
 }
 
 .price-label-bold {
-  font-weight: 700;
-  color: #495057;
-  font-size: 1.1em;
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 1em;
 }
 
 .original-price {
   text-decoration: line-through;
-  color: #dc3545;
-  font-size: 1em;
-  background: rgba(220, 53, 69, 0.1);
-  padding: 4px 8px;
-  border-radius: 8px;
+  color: #f87171;
+  font-size: 0.95em;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  padding: 3px 8px;
+  border-radius: 6px;
 }
 
 .discounted-price {
-  font-weight: 700;
-  color: #28a745;
-  font-size: 1.3em;
-  background: rgba(40, 167, 69, 0.1);
-  padding: 6px 12px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
+  font-weight: 600;
+  color: #10b981;
+  font-size: 1.2em;
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  padding: 4px 10px;
+  border-radius: 6px;
 }
 
 .price-no-discount-value {
-  color: #495057;
-  font-size: 1.3em;
-  font-weight: 700;
+  color: #6b46c1;
+  font-size: 1.2em;
+  font-weight: 600;
 }
 
 .stock-info {
   width: 100%;
   text-align: center;
-  font-size: 1em;
-  font-weight: 600;
-  color: #17a2b8;
-  margin-bottom: 10px;
-  padding: 8px;
-  background: rgba(23, 162, 184, 0.1);
-  border-radius: 10px;
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #3b82f6;
+  margin-bottom: 8px;
+  padding: 6px;
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-radius: 6px;
 }
 
 .book-categories {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .book-categories .categories-label {
-  font-weight: 600;
-  color: #495057;
-  margin-bottom: 10px;
-  font-size: 1em;
+  font-weight: 500;
+  color: #4a5568;
+  margin-bottom: 8px;
+  font-size: 0.9em;
 }
 
 .book-categories .categories-list {
@@ -132,77 +114,74 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .book-categories .categories-list li {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.85em;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  color: #16a34a;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8em;
   font-weight: 500;
   white-space: nowrap;
-  box-shadow: 0 2px 5px rgba(102, 126, 234, 0.3);
-  transition: transform 0.2s ease;
-}
-
-.book-categories .categories-list li:hover {
-  transform: scale(1.05);
+  border: 1px solid #bbf7d0;
 }
 
 .book-rating {
-  margin: 20px 0;
-  padding: 15px;
-  background: rgba(248, 249, 250, 0.8);
-  border-radius: 15px;
+  margin: 15px 0;
+  padding: 12px;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-radius: 8px;
   text-align: center;
+  border: 1px solid #fde68a;
 }
 
 .book-rating p {
-  margin-bottom: 10px;
-  font-weight: 600;
-  color: #495057;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #4a5568;
+  font-size: 0.9em;
 }
 
 .rating-buttons {
   display: flex;
   justify-content: center;
-  gap: 5px;
-  margin-top: 10px;
+  gap: 4px;
+  margin-top: 8px;
 }
 
 .rating-buttons button {
-  width: 35px;
-  height: 35px;
-  border: 2px solid #ffc107;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #f59e0b;
   background: white;
-  color: #ffc107;
-  border-radius: 50%;
+  color: #f59e0b;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: 700;
-  transition: all 0.2s ease;
-  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 12px;
 }
 
 .rating-buttons button:hover {
-  background: #ffc107;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
   color: white;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .stock-action-area {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 12px;
   margin-top: auto;
   width: 100%;
 }
 
 .buttons-row, .stock-update {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   justify-content: center;
   width: 100%;
   flex-wrap: wrap;
@@ -211,117 +190,104 @@
 .buttons-row button,
 .stock-update input,
 .stock-update button {
-  padding: 12px 20px;
-  font-size: 0.95em;
-  font-weight: 600;
-  border-radius: 25px;
+  padding: 10px 16px;
+  font-size: 0.9em;
+  font-weight: 500;
+  border-radius: 8px;
   cursor: pointer;
   border: none;
   transition: all 0.3s ease;
-  min-width: 120px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  min-width: 100px;
 }
 
 .stock-update input {
-  border: 2px solid #dee2e6;
+  border: 1px solid #e9d8fd;
   text-align: center;
   background: white;
-  color: #495057;
+  color: #4a5568;
 }
 
 .stock-update input:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
 }
 
 .add-to-cart-button {
-  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
 }
 
 .add-to-cart-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
 }
 
 .consider-button {
-  background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
 }
 
 .consider-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
 }
 
 .stock-update button {
-  background: linear-gradient(135deg, #17a2b8 0%, #6f42c1 100%);
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
 }
 
 .stock-update button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(23, 162, 184, 0.4);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
 }
 
 .delete-book-button {
-  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
   color: white;
-  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+  box-shadow: 0 4px 15px rgba(248, 113, 113, 0.2);
 }
 
 .delete-book-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+  box-shadow: 0 6px 20px rgba(248, 113, 113, 0.3);
 }
 
 /* מצבים מיוחדים */
 .book-card.significant-discount {
-  background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(32, 201, 151, 0.1) 100%);
-  border: 2px solid #28a745;
-  box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
-}
-
-.book-card.significant-discount::before {
-  background: linear-gradient(90deg, #28a745, #20c997);
-  transform: scaleX(1);
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border: 2px solid #10b981;
+  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15);
 }
 
 .book-card.out-of-stock-card {
-  background: linear-gradient(135deg, rgba(108, 117, 125, 0.1) 0%, rgba(173, 181, 189, 0.1) 100%);
-  border: 2px solid #6c757d;
-  opacity: 0.7;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid #cbd5e0;
+  opacity: 0.8;
 }
 
 .book-card.considering-card {
-  background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(253, 126, 20, 0.1) 100%);
-  border: 2px dashed #ffc107;
-  box-shadow: 0 0 20px rgba(255, 193, 7, 0.4);
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 2px dashed #f59e0b;
+  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15);
 }
 
 .out-of-stock-message {
   display: block;
   width: 100%;
-  color: #dc3545;
-  font-weight: 700;
-  font-size: 1.1em;
+  color: #f87171;
+  font-weight: 600;
+  font-size: 1em;
   text-align: center;
-  margin-top: 15px;
-  padding: 15px;
-  background: rgba(220, 53, 69, 0.1);
-  border-radius: 15px;
-  border: 2px solid rgba(220, 53, 69, 0.3);
+  margin-top: 12px;
+  padding: 12px;
+  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+  border-radius: 8px;
+  border: 1px solid #fecaca;
 }
 
 .add-to-cart-button.hidden-button {
@@ -331,7 +297,7 @@
 /* רספונסיביות */
 @media (max-width: 768px) {
   .book-card {
-    width: 280px;
+    width: 260px;
     margin: 0 10px;
   }
   
@@ -344,6 +310,6 @@
   .stock-update input,
   .stock-update button {
     width: 100%;
-    max-width: 200px;
+    max-width: 180px;
   }
 }
