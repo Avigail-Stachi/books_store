@@ -1,353 +1,138 @@
+/* src/styles/BookDisplay.css */
+
+/* פלטת צבעים (לעיונך):
+   סגולים: #6a0dad (כהה), #800080 (רגיל), #9370DB (בינוני), #D8BFD8 (בהיר), #EEE8F4 (מאוד בהיר)
+   ניטרליים: #ffffff, #f9f9f9, #f0f0f0, #e0e0e0, #cccccc, #aaaaaa, #555555, #333333
+*/
+
 .book-card {
-  background: linear-gradient(135deg, #ffffff 0%, #faf7ff 100%);
-  border: 1px solid #e9d8fd;
-  padding: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%); /* רקע ניטרלי בהיר */
+  border: 1px solid #e0e0e0; /* גבול עדין ניטרלי */
+  padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* צל עדין */
   width: 280px;
-  min-height: 420px;
+  min-height: 460px;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: all 0.3s ease;
+  font-family: Arial, sans-serif;
+  color: #333333; /* צבע טקסט כללי כהה */
+  position: relative;
 }
 
 .book-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.15);
-  border-color: #c4b5fd;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12); /* צל מודגש יותר במעבר עכבר */
+  border-color: #d8bfd8; /* סגול בהיר בגבול בהובר */
 }
 
 .book-card h3 {
-  color: #6b46c1;
+  color: #6a0dad; /* סגול כהה לכותרת */
   margin-top: 0;
-  font-size: 1.4em;
-  font-weight: 600;
-  min-height: 45px;
+  font-size: 1.6em;
+  font-weight: 700;
+  min-height: 55px;
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 1.3;
-  margin-bottom: 12px;
-}
-
-.book-card .book-author {
-  color: #6b7280;
-  font-size: 1em;
   margin-bottom: 15px;
-  font-style: italic;
-  font-weight: 400;
 }
 
-.price-info {
-  margin-bottom: 18px;
-  text-align: center;
-  padding: 12px;
-  background: linear-gradient(135deg, #f1f5f9 0%, #f8fafc 100%);
-  border-radius: 8px;
+.book-card p {
+  margin-bottom: 8px;
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+.book-card p strong {
+  color: #555555; /* אפור בינוני לטקסט מודגש */
+}
+
+.category-list {
+  margin-top: 10px;
+  margin-bottom: 15px;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 8px;
-  border: 1px solid #e2e8f0;
+  justify-content: center;
+  gap: 5px;
 }
 
-.price-label-bold {
-  font-weight: 600;
-  color: #4a5568;
-  font-size: 1em;
+.category-tag {
+  background-color: #f0f0f0; /* רקע ניטרלי לתגית */
+  color: #555555;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  white-space: nowrap;
 }
 
 .original-price {
   text-decoration: line-through;
-  color: #f87171;
-  font-size: 0.95em;
-  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
-  padding: 3px 8px;
-  border-radius: 6px;
+  color: #aaaaaa; /* אפור בהיר למחיר מקורי מקווקו */
+  margin-right: 5px;
+  font-size: 0.9em;
 }
 
 .discounted-price {
-  font-weight: 600;
-  color: #10b981;
-  font-size: 1.2em;
-  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-  padding: 4px 10px;
-  border-radius: 6px;
+  color: #800080; /* סגול כהה למחיר מוזל */
+  font-weight: bold;
+  font-size: 1.1em;
 }
 
-.price-no-discount-value {
-  color: #6b46c1;
-  font-size: 1.2em;
-  font-weight: 600;
-}
-
-.stock-info {
-  width: 100%;
-  text-align: center;
+.discount-percentage {
+  color: #6a0dad; /* סגול כהה לאחוז הנחה */
+  font-weight: bold;
   font-size: 0.9em;
-  font-weight: 500;
-  color: #3b82f6;
-  margin-bottom: 8px;
-  padding: 6px;
-  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-  border-radius: 6px;
+  margin-left: 5px;
 }
 
-.book-categories {
-  margin-bottom: 15px;
-}
-
-.book-categories .categories-label {
-  font-weight: 500;
-  color: #4a5568;
-  margin-bottom: 8px;
-  font-size: 0.9em;
-}
-
-.book-categories .categories-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 6px;
-}
-
-.book-categories .categories-list li {
-  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-  color: #16a34a;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 0.8em;
-  font-weight: 500;
-  white-space: nowrap;
-  border: 1px solid #bbf7d0;
-}
-
-.book-rating {
-  margin: 15px 0;
-  padding: 12px;
-  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-  border-radius: 8px;
-  text-align: center;
-  border: 1px solid #fde68a;
-}
-
-.book-rating p {
-  margin-bottom: 8px;
-  font-weight: 500;
-  color: #4a5568;
-  font-size: 0.9em;
-}
-
-.rating-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 4px;
-  margin-top: 8px;
-}
-
-.rating-buttons button {
-  width: 30px;
-  height: 30px;
-  border: 1px solid #f59e0b;
-  background: white;
-  color: #f59e0b;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  font-size: 12px;
-}
-
-.rating-buttons button:hover {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  color: white;
-  transform: scale(1.05);
-}
-
-.stock-action-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  margin-top: auto;
-  width: 100%;
-}
-
-.buttons-row, .stock-update {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  width: 100%;
-  flex-wrap: wrap;
-}
-
-.buttons-row button,
-.stock-update input,
-.stock-update button {
-  padding: 10px 16px;
-  font-size: 0.9em;
-  font-weight: 500;
-  border-radius: 8px;
-  cursor: pointer;
-  border: none;
-  transition: all 0.3s ease;
-  min-width: 100px;
-}
-
-.stock-update input {
-  border: 1px solid #e9d8fd;
-  text-align: center;
-  background: white;
-  color: #4a5568;
-}
-
-.stock-update input:focus {
-  outline: none;
-  border-color: #8b5cf6;
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
-}
-
-.add-to-cart-button {
-  background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
-}
-
-.add-to-cart-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
-}
-
-.consider-button {
-  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
-}
-
-.consider-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
-}
-
-.stock-update button {
-  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
-}
-
-.stock-update button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
-}
-
-.delete-book-button {
-  background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
-  color: white;
-  box-shadow: 0 4px 15px rgba(248, 113, 113, 0.2);
-}
-
-.delete-book-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(248, 113, 113, 0.3);
-}
-
-/* מצבים מיוחדים */
-.book-card.significant-discount {
-  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-  border: 2px solid #10b981;
-  box-shadow: 0 4px 20px rgba(16, 185, 129, 0.15);
-}
-
-.book-card.out-of-stock-card {
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-  border: 1px solid #cbd5e0;
-  opacity: 0.8;
-}
-
-.book-card.considering-card {
-  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-  border: 2px dashed #f59e0b;
-  box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15);
-}
-
-.out-of-stock-message {
-  display: block;
-  width: 100%;
-  color: #f87171;
-  font-weight: 600;
+.average-rating {
+  color: #800080; /* סגול לדירוג ממוצע */
+  font-weight: bold;
+  margin-top: 10px;
   font-size: 1em;
-  text-align: center;
-  margin-top: 12px;
-  padding: 12px;
-  background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
-  border-radius: 8px;
-  border: 1px solid #fecaca;
 }
 
-.add-to-cart-button.hidden-button {
-  display: none;
+.no-rating {
+  color: #aaaaaa; /* אפור בהיר ל"עדיין לא דורג" */
+  font-style: italic;
+  margin-top: 10px;
+  font-size: 0.9em;
 }
-
-/* רספונסיביות */
-@media (max-width: 768px) {
-  .book-card {
-    width: 260px;
-    margin: 0 10px;
-  }
-  
-  .buttons-row, .stock-update {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .buttons-row button,
-  .stock-update input,
-  .stock-update button {
-    width: 100%;
-    max-width: 180px;
-  }
-}
-
-/* src/styles/BookDisplay.css */
-
-/* ... (הקוד הקיים שלך) ... */
 
 /* סגנון למתג ON/OFF */
 .toggle-rating-container {
   display: flex;
   align-items: center;
-  justify-content: center; /* מרכז את המתג */
-  margin-top: 15px;
-  margin-bottom: 10px;
+  justify-content: center;
+  margin-top: 18px;
+  margin-bottom: 15px;
 }
 
 .toggle-label {
-  margin-right: 10px;
+  margin-right: 25px; /* הגדלת הרווח כאן */
   font-weight: bold;
-  color: #333;
+  color: #555555; /* אפור כהה יותר ללייבל */
+  font-size: 1.1em;
 }
 
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 50px;
+  height: 28px;
 }
 
-/* הסתר את ה-checkbox המקורי */
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-/* סגנון למעגל/slider */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -355,54 +140,170 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #cccccc; /* אפור בהיר למצב OFF */
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  border-radius: 34px; /* יוצר צורה מעוגלת */
+  border-radius: 28px;
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
+  height: 20px;
+  width: 20px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: #ffffff; /* לבן לעיגול הזז */
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  border-radius: 50%; /* יוצר את העיגול הזז */
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* צל עדין לעיגול */
 }
 
 input:checked + .slider {
-  background-color: #8b5cf6; /* צבע סגול כשהוא ON */
+  background-color: #9370db; /* סגול בינוני למצב ON */
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #8b5cf6;
+  box-shadow: 0 0 1px #9370db;
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px); /* מזיז את העיגול ימינה */
+  -webkit-transform: translateX(22px);
+  -ms-transform: translateX(22px);
+  transform: translateX(22px);
 }
 
 /* סגנונות למקטע הדירוג */
 .rating-section {
   margin-top: 15px;
   padding-top: 10px;
-  border-top: 1px solid #eee;
+  border-top: 1px solid #f0f0f0; /* קו הפרדה עדין */
+  text-align: center;
+}
+
+.rating-section label {
+  font-size: 1em;
+  color: #555555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .rating-select {
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  margin-left: 5px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #cccccc; /* גבול ניטרלי */
   font-size: 1em;
-  width: 100%; /* כדי שימלא את הרוחב */
-  max-width: 150px; /* רוחב מוגבל */
+  max-width: 150px;
+  appearance: none;
+  background-color: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
 }
 
-/* ... (שאר ה-CSS שלך) ... */
+.rating-select:hover {
+  border-color: #aaaaaa;
+}
+
+.rating-select:focus {
+  outline: none;
+  border-color: #9370db; /* סגול בינוני בפוקוס */
+  box-shadow: 0 0 0 2px rgba(147, 112, 219, 0.2);
+}
+
+.book-actions {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+/* כפתורים כלליים - צבעים סגולים בהירים וניטרליים */
+.add-to-cart-button,
+.consider-button,
+.stock-update button,
+.delete-book-button { /* כל הכפתורים מקבלים את אותו סגנון בסיסי */
+  background-color: #d8bfd8; /* סגול בהיר */
+  color: #555555; /* טקסט אפור כהה */
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  width: 100%;
+}
+
+.add-to-cart-button:hover,
+.consider-button:hover,
+.stock-update button:hover,
+.delete-book-button:hover { /* כל הכפתורים מקבלים אותו סגנון הובר */
+  background-color: #c4b5fd; /* סגול בהיר יותר בהובר */
+  color: #333333; /* טקסט אפור כהה יותר בהובר */
+  transform: translateY(-2px);
+}
+
+.stock-update {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.stock-update input {
+  width: calc(100% - 22px);
+  padding: 8px 10px;
+  border: 1px solid #cccccc; /* גבול ניטרלי לאינפוט */
+  border-radius: 8px;
+  font-size: 0.95em;
+  text-align: center;
+  color: #333333;
+}
+
+
+/* מצבים מיוחדים */
+.book-card.significant-discount {
+  background: linear-gradient(135deg, #f7f0ff 0%, #eeebf8 100%); /* רקע סגול בהיר מאוד להנחה */
+  border: 2px solid #d8bfd8; /* גבול סגול בהיר */
+  box-shadow: 0 4px 20px rgba(147, 112, 219, 0.1);
+}
+
+.book-card.out-of-stock-card {
+  background: linear-gradient(135deg, #fcfcfc 0%, #f5f5f5 100%);
+  border: 1px solid #e0e0e0;
+  opacity: 0.9;
+  filter: grayscale(10%);
+}
+
+.out-of-stock-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.95); /* רקע לבן שקוף יותר */
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 2px solid #800080; /* סגול כהה לגבול */
+  color: #800080; /* סגול כהה לטקסט */
+  font-weight: bold;
+  font-size: 1.2em;
+  z-index: 10;
+  white-space: nowrap;
+  box-shadow: 0 0 15px rgba(128, 0, 128, 0.2); /* צל סגול */
+}
+
+
+.book-card.considering-card {
+  /* שינוי הרקע ל-isConsidering - סגול בהיר */
+  background: linear-gradient(135deg, #eee8f4 0%, #d8bfd8 100%); /* גווני סגול בהירים */
+  border: 2px solid #9370db; /* גבול סגול בינוני */
+  box-shadow: 0 4px 20px rgba(147, 112, 219, 0.2); /* צל סגול מודגש יותר */
+}
