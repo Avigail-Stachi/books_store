@@ -43,13 +43,10 @@ let top3BooksCache = [];
 
 const updateTop3BooksCache = () => {
   const ratedBooks = books.filter((book) => book.ratingCount > 0);
-  // מיון לפי דירוג ממוצע ואז לפי כמות דירוגים
   ratedBooks.sort((a, b) => {
-    // ראשית מיון לפי דירוג ממוצע (גבוה יותר ראשון)
     if (b.averageRating !== a.averageRating) {
       return b.averageRating - a.averageRating;
     }
-    // אם הדירוג זהה, מיון לפי כמות דירוגים (יותר דירוגים ראשון)
     return b.ratingCount - a.ratingCount;
   });
   top3BooksCache = ratedBooks.slice(0, 3);
@@ -191,7 +188,7 @@ app.patch("/api/books/:id/rate", (req, res) => {
 
     books[bookIndex] = {
       ...book,
-      averageRating: Math.round(newAvg * 10) / 10, // עיגול לעשירית
+      averageRating: Math.round(newAvg * 10) / 10,
       ratingCount: newCount,
     };
 
@@ -204,7 +201,6 @@ app.patch("/api/books/:id/rate", (req, res) => {
     writeBooksToFile();
     updateTop3BooksCache();
 
-    // מחזיר את הספר המעודכן במלואו
     res.json(books[bookIndex]);
   } else {
     res.status(404).send("Book not found");

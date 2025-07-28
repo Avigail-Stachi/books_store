@@ -297,13 +297,12 @@ input:checked + .slider:before {
   font-size: 1.2em;
   z-index: 10;
   white-space: nowrap;
-  box-shadow: 0 0 15px rgba(128, 0, 128, 0.2); /* צל סגול */
+  box-shadow: 0 0 15px rgba(128, 0, 128, 0.2);
 }
 
 
 .book-card.considering-card {
-  /* שינוי הרקע ל-isConsidering - סגול בהיר */
-  background: linear-gradient(135deg, #eee8f4 0%, #d8bfd8 100%); /* גווני סגול בהירים */
+  background: linear-gradient(135deg, #eee8f4 0%, #d8bfd8 100%);
   border: 2px solid #9370db; /* גבול סגול בינוני */
   box-shadow: 0 4px 20px rgba(147, 112, 219, 0.2); /* צל סגול מודגש יותר */
 }

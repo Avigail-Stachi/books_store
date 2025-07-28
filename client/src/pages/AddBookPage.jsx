@@ -7,7 +7,7 @@ const AddBookPage = ({ onAddBook, allCategories }) => {
 
   const handleAddBook = async (newBook) => {
     await onAddBook(newBook);
-    navigate("/books"); // מעבר לעמוד הספרים אחרי הוספה
+    navigate("/books");
   };
 
   return (

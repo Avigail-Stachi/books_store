@@ -1,4 +1,3 @@
-// src/components/BookDisplay.jsx
 import React, { useState } from "react";
 import "../styles/BookDisplay.css";
 
@@ -40,7 +39,6 @@ const BookDisplay = ({ book, onDelete, onStockUpdate, onRate }) => {
     setIsConsidering((prev) => !prev);
   };
 
-  // פונקציה לשינוי מצב הצגת הדירוג (תקרא כאשר הצ'קבוקס משתנה)
   const handleToggleRatingChange = () => {
     setShowRating((prev) => !prev);
   };
@@ -83,7 +81,6 @@ const BookDisplay = ({ book, onDelete, onStockUpdate, onRate }) => {
         )}
       </p>
 
-      {/* תצוגת דירוג ממוצע קיימת */}
       {averageRating > 0 ? (
         <p className="average-rating">
           דירוג ממוצע: {averageRating.toFixed(1)} ({ratingCount} דירוגים)
@@ -92,7 +89,6 @@ const BookDisplay = ({ book, onDelete, onStockUpdate, onRate }) => {
         <p className="no-rating">עדיין לא דורג</p>
       )}
 
-      {/* מתג ה-ON/OFF החדש */}
       <div className="toggle-rating-container">
         <span className="toggle-label">דרג ספר:</span>
         <label className="switch">
@@ -105,7 +101,6 @@ const BookDisplay = ({ book, onDelete, onStockUpdate, onRate }) => {
         </label>
       </div>
 
-      {/* תנאי להצגת כלי הדירוג */}
       {showRating && (
         <div className="rating-section">
           <label>

@@ -26,7 +26,7 @@
       "פילוסופיה"
     ],
     "averageRating": 4,
-    "ratingCount": 3
+    "ratingCount": 5
   },
   {
     "id": 3,
@@ -88,13 +88,27 @@
   },
   {
     "id": 7,
-    "title": "א",
-    "author": "ו",
-    "price": 7,
-    "discountPercentage": -26,
-    "stockQuantity": 9,
+    "title": "אאא",
+    "author": "טטט",
+    "price": 100,
+    "discountPercentage": 20,
+    "stockQuantity": 50,
     "categories": [
-      "פנטזיה"
+      "אסטרונומיה",
+      "אאטט"
+    ],
+    "averageRating": 0,
+    "ratingCount": 0
+  },
+  {
+    "id": 8,
+    "title": "אא",
+    "author": "anonymous",
+    "price": 42,
+    "discountPercentage": -1,
+    "stockQuantity": 50,
+    "categories": [
+      "עתידנות"
     ],
     "averageRating": 0,
     "ratingCount": 0

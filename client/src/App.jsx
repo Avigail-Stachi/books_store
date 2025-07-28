@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import "./styles/App.css"; // עדיין תוכל להשתמש בזה לעיצובים גלובליים
-import Layout from "./components/Layout"; // ייבא את קומפוננטת ה-Layout החדשה
+import "./styles/App.css";
+import Layout from "./components/Layout";
 import HomePage from "./pages/HomePage";
 import BooksPage from "./pages/BooksPage";
 import AddBookPage from "./pages/AddBookPage";
@@ -136,7 +136,6 @@ function App() {
   };
 
   return (
-    // עוטפים את ה-Routes בקומפוננטת Layout
     <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
