@@ -73,7 +73,7 @@ main.book-list-container {
   box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
 }
 
-/* לודינג */
+
 .loading-container {
   display: flex;
   flex-direction: column;
@@ -183,7 +183,6 @@ main.book-list-container {
   margin: 0;
 }
 
-/* כפתור ניווט בתוך הפיצ'רים */
 .feature-link {
   text-decoration: none;
   color: inherit;

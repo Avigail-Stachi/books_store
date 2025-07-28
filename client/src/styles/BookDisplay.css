@@ -1,16 +1,9 @@
-/* src/styles/BookDisplay.css */
-
-/* פלטת צבעים (לעיונך):
-   סגולים: #6a0dad (כהה), #800080 (רגיל), #9370DB (בינוני), #D8BFD8 (בהיר), #EEE8F4 (מאוד בהיר)
-   ניטרליים: #ffffff, #f9f9f9, #f0f0f0, #e0e0e0, #cccccc, #aaaaaa, #555555, #333333
-*/
-
 .book-card {
-  background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%); /* רקע ניטרלי בהיר */
-  border: 1px solid #e0e0e0; /* גבול עדין ניטרלי */
+  background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+  border: 1px solid #e0e0e0;
   padding: 25px;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* צל עדין */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   width: 280px;
   min-height: 460px;
   text-align: center;
@@ -19,18 +12,18 @@
   justify-content: space-between;
   transition: all 0.3s ease;
   font-family: Arial, sans-serif;
-  color: #333333; /* צבע טקסט כללי כהה */
+  color: #333333;
   position: relative;
 }
 
 .book-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12); /* צל מודגש יותר במעבר עכבר */
-  border-color: #d8bfd8; /* סגול בהיר בגבול בהובר */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  border-color: #d8bfd8;
 }
 
 .book-card h3 {
-  color: #6a0dad; /* סגול כהה לכותרת */
+  color: #6a0dad;
   margin-top: 0;
   font-size: 1.6em;
   font-weight: 700;
@@ -49,7 +42,7 @@
 }
 
 .book-card p strong {
-  color: #555555; /* אפור בינוני לטקסט מודגש */
+  color: #555555;
 }
 
 .category-list {
@@ -62,7 +55,7 @@
 }
 
 .category-tag {
-  background-color: #f0f0f0; /* רקע ניטרלי לתגית */
+  background-color: #f0f0f0;
   color: #555555;
   padding: 4px 10px;
   border-radius: 5px;
@@ -72,39 +65,38 @@
 
 .original-price {
   text-decoration: line-through;
-  color: #aaaaaa; /* אפור בהיר למחיר מקורי מקווקו */
+  color: #aaaaaa;
   margin-right: 5px;
   font-size: 0.9em;
 }
 
 .discounted-price {
-  color: #800080; /* סגול כהה למחיר מוזל */
+  color: #800080;
   font-weight: bold;
   font-size: 1.1em;
 }
 
 .discount-percentage {
-  color: #6a0dad; /* סגול כהה לאחוז הנחה */
+  color: #6a0dad;
   font-weight: bold;
   font-size: 0.9em;
   margin-left: 5px;
 }
 
 .average-rating {
-  color: #800080; /* סגול לדירוג ממוצע */
+  color: #800080;
   font-weight: bold;
   margin-top: 10px;
   font-size: 1em;
 }
 
 .no-rating {
-  color: #aaaaaa; /* אפור בהיר ל"עדיין לא דורג" */
+  color: #aaaaaa;
   font-style: italic;
   margin-top: 10px;
   font-size: 0.9em;
 }
 
-/* סגנון למתג ON/OFF */
 .toggle-rating-container {
   display: flex;
   align-items: center;
@@ -114,9 +106,9 @@
 }
 
 .toggle-label {
-  margin-right: 25px; /* הגדלת הרווח כאן */
+  margin-right: 25px;
   font-weight: bold;
-  color: #555555; /* אפור כהה יותר ללייבל */
+  color: #555555;
   font-size: 1.1em;
 }
 
@@ -140,7 +132,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #cccccc; /* אפור בהיר למצב OFF */
+  background-color: #cccccc;
   -webkit-transition: 0.4s;
   transition: 0.4s;
   border-radius: 28px;
@@ -153,15 +145,15 @@
   width: 20px;
   left: 4px;
   bottom: 4px;
-  background-color: #ffffff; /* לבן לעיגול הזז */
+  background-color: #ffffff;
   -webkit-transition: 0.4s;
   transition: 0.4s;
   border-radius: 50%;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* צל עדין לעיגול */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 input:checked + .slider {
-  background-color: #9370db; /* סגול בינוני למצב ON */
+  background-color: #9370db;
 }
 
 input:focus + .slider {
@@ -174,11 +166,10 @@ input:checked + .slider:before {
   transform: translateX(22px);
 }
 
-/* סגנונות למקטע הדירוג */
 .rating-section {
   margin-top: 15px;
   padding-top: 10px;
-  border-top: 1px solid #f0f0f0; /* קו הפרדה עדין */
+  border-top: 1px solid #f0f0f0;
   text-align: center;
 }
 
@@ -194,7 +185,7 @@ input:checked + .slider:before {
 .rating-select {
   padding: 8px 12px;
   border-radius: 8px;
-  border: 1px solid #cccccc; /* גבול ניטרלי */
+  border: 1px solid #cccccc;
   font-size: 1em;
   max-width: 150px;
   appearance: none;
@@ -209,7 +200,7 @@ input:checked + .slider:before {
 
 .rating-select:focus {
   outline: none;
-  border-color: #9370db; /* סגול בינוני בפוקוס */
+  border-color: #9370db;
   box-shadow: 0 0 0 2px rgba(147, 112, 219, 0.2);
 }
 
@@ -226,13 +217,12 @@ input:checked + .slider:before {
   margin-bottom: 15px;
 }
 
-/* כפתורים כלליים - צבעים סגולים בהירים וניטרליים */
 .add-to-cart-button,
 .consider-button,
 .stock-update button,
-.delete-book-button { /* כל הכפתורים מקבלים את אותו סגנון בסיסי */
-  background-color: #d8bfd8; /* סגול בהיר */
-  color: #555555; /* טקסט אפור כהה */
+.delete-book-button {
+  background-color: #d8bfd8;
+  color: #555555;
   padding: 10px 15px;
   border: none;
   border-radius: 8px;
@@ -245,9 +235,9 @@ input:checked + .slider:before {
 .add-to-cart-button:hover,
 .consider-button:hover,
 .stock-update button:hover,
-.delete-book-button:hover { /* כל הכפתורים מקבלים אותו סגנון הובר */
-  background-color: #c4b5fd; /* סגול בהיר יותר בהובר */
-  color: #333333; /* טקסט אפור כהה יותר בהובר */
+.delete-book-button:hover {
+  background-color: #c4b5fd;
+  color: #333333;
   transform: translateY(-2px);
 }
 
@@ -261,18 +251,16 @@ input:checked + .slider:before {
 .stock-update input {
   width: calc(100% - 22px);
   padding: 8px 10px;
-  border: 1px solid #cccccc; /* גבול ניטרלי לאינפוט */
+  border: 1px solid #cccccc;
   border-radius: 8px;
   font-size: 0.95em;
   text-align: center;
   color: #333333;
 }
 
-
-/* מצבים מיוחדים */
 .book-card.significant-discount {
-  background: linear-gradient(135deg, #f7f0ff 0%, #eeebf8 100%); /* רקע סגול בהיר מאוד להנחה */
-  border: 2px solid #d8bfd8; /* גבול סגול בהיר */
+  background: linear-gradient(135deg, #f7f0ff 0%, #eeebf8 100%);
+  border: 2px solid #d8bfd8;
   box-shadow: 0 4px 20px rgba(147, 112, 219, 0.1);
 }
 
@@ -288,11 +276,11 @@ input:checked + .slider:before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgba(255, 255, 255, 0.95); /* רקע לבן שקוף יותר */
+  background-color: rgba(255, 255, 255, 0.95);
   padding: 10px 20px;
   border-radius: 10px;
-  border: 2px solid #800080; /* סגול כהה לגבול */
-  color: #800080; /* סגול כהה לטקסט */
+  border: 2px solid #800080;
+  color: #800080;
   font-weight: bold;
   font-size: 1.2em;
   z-index: 10;
@@ -300,9 +288,8 @@ input:checked + .slider:before {
   box-shadow: 0 0 15px rgba(128, 0, 128, 0.2);
 }
 
-
 .book-card.considering-card {
   background: linear-gradient(135deg, #eee8f4 0%, #d8bfd8 100%);
-  border: 2px solid #9370db; /* גבול סגול בינוני */
-  box-shadow: 0 4px 20px rgba(147, 112, 219, 0.2); /* צל סגול מודגש יותר */
+  border: 2px solid #9370db;
+  box-shadow: 0 4px 20px rgba(147, 112, 219, 0.2);
 }

@@ -124,7 +124,7 @@
   box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
 }
 
-/* עיצוב לשדה קטגוריה חדשה */
+
 .custom-category-container {
   display: flex;
   gap: 10px;
@@ -163,7 +163,7 @@
   box-shadow: none;
 }
 
-/* רספונסיביות */
+
 @media (max-width: 768px) {
   .add-book-form {
     margin: 20px;

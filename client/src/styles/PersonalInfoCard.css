@@ -34,11 +34,11 @@
   cursor: pointer;
   margin-top: 15px;
   font-size: 1em;
-  transition: background-color 0.3s ease; /* אנימציה למעבר צבע */
+  transition: background-color 0.3s ease; 
 }
 
 .console-button:hover {
-  background-color: #0056b3; /* שינוי צבע בלחיצה/ריחוף */
+  background-color: #0056b3; 
 }
 
 .console-button:active {

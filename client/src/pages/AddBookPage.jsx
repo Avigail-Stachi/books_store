@@ -1,21 +1,34 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import AddBookForm from "../components/AddBookForm";
+import BookDisplay from "../components/BookDisplay";
 
-const AddBookPage = ({ onAddBook, allCategories }) => {
-  const navigate = useNavigate();
-
-  const handleAddBook = async (newBook) => {
-    await onAddBook(newBook);
-    navigate("/books");
-  };
+const BooksPage = ({ books, loading, onDelete, onStockUpdate, onRate }) => {
+  if (loading) {
+    return (
+      <div className="page-container">
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p className="loading-text">טוען ספרים...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="page-container">
-      <h2 className="page-title">הוסף ספר חדש</h2>
-      <AddBookForm onAddBook={handleAddBook} allCategories={allCategories} />
+      <h2 className="page-title">כל הספרים</h2>
+      <main className="book-list-container">
+        {books.map((book) => (
+          <BookDisplay
+            key={book.id}
+            book={book}
+            onDelete={() => onDelete(book.id)}
+            onStockUpdate={(newStock) => onStockUpdate(book.id, newStock)}
+            onRate={(rating) => onRate(book.id, rating)}
+          />
+        ))}
+      </main>
     </div>
   );
 };
 
-export default AddBookPage;
+export default BooksPage;

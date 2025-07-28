@@ -5,7 +5,7 @@
     "author": "א. כהן",
     "price": 50,
     "discountPercentage": 10,
-    "stockQuantity": 5,
+    "stockQuantity": 1,
     "categories": [
       "מדע בדיוני",
       "הרפתקאות"
@@ -19,7 +19,7 @@
     "author": null,
     "price": 75.5,
     "discountPercentage": 20,
-    "stockQuantity": 10,
+    "stockQuantity": 7,
     "categories": [
       "קומדיה",
       "מדע בדיוני",
@@ -48,7 +48,7 @@
     "author": "יעל א.",
     "price": 80,
     "discountPercentage": 15,
-    "stockQuantity": 12,
+    "stockQuantity": 4,
     "categories": [
       "הרפתקאות",
       "ילדים",
@@ -63,7 +63,7 @@
     "author": "שרית פ.",
     "price": 95,
     "discountPercentage": 0,
-    "stockQuantity": 22,
+    "stockQuantity": 5,
     "categories": [
       "עתידנות",
       "חברה",
@@ -92,7 +92,7 @@
     "author": "טטט",
     "price": 100,
     "discountPercentage": 20,
-    "stockQuantity": 50,
+    "stockQuantity": 7,
     "categories": [
       "אסטרונומיה",
       "אאטט"
@@ -106,7 +106,7 @@
     "author": "anonymous",
     "price": 42,
     "discountPercentage": -1,
-    "stockQuantity": 50,
+    "stockQuantity": 8,
     "categories": [
       "עתידנות"
     ],
