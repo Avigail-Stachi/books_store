@@ -207,24 +207,6 @@ app.patch("/api/books/:id/rate", (req, res) => {
   }
 });
 
-app.patch("/api/books/:id/stock/decrement", (req, res) => {
-  const bookId = parseInt(req.params.id);
-
-  const bookIndex = books.findIndex((b) => b.id === bookId);
-  if (bookIndex === -1) {
-    return res.status(404).send("Book not found");
-  }
-
-  if (books[bookIndex].stockQuantity <= 0) {
-    return res.status(400).send("Stock is already zero, cannot decrement");
-  }
-
-  books[bookIndex].stockQuantity -= 1;
-  writeBooksToFile();
-
-  res.json(books[bookIndex]);
-});
-
 // מחיקת ספר
 app.delete("/api/books/:id", (req, res) => {
   const bookId = parseInt(req.params.id);

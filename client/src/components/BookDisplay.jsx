@@ -41,7 +41,6 @@ const BookDisplay = ({ book, onDelete, onStockUpdate, onRate }) => {
         categories: categories,
       });
 
-      // קריאה לפונקציית עדכון המלאי עם הכמות הנוכחית מינוס 1
       await onStockUpdate(stockQuantity - 1);
 
       alert(`הוספת את "${title}" לסל!`);
@@ -63,7 +62,6 @@ const BookDisplay = ({ book, onDelete, onStockUpdate, onRate }) => {
 
   const hasSignificantDiscount = discountPercentage >= 15 && price > 0;
 
-  // עדכון stockInputValue כשהמלאי משתנה
   React.useEffect(() => {
     setStockInputValue(stockQuantity);
   }, [stockQuantity]);
